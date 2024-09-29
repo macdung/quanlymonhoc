@@ -53,8 +53,8 @@ public class MyDB extends SQLiteOpenHelper {
                 + SubjectName + " Text, "
                 + SubjectCount + " Integer, "
                 + SubjectImagePath + " Text, "
-                + GradeId + " INTEGER, "
-                + "FOREIGN KEY (" + GradeId + ") REFERENCES " + Table1Name + "(" + GradeId + ") ON DELETE CASCADE)";
+                + "GradeId INTEGER, "
+                + "FOREIGN KEY (GradeId) REFERENCES " + Table1Name + "(" + GradeId + ") ON DELETE CASCADE)";
         //chạy câu truy vấn SQL để tạo bảng
         db.execSQL(sqlCreate2);
     }

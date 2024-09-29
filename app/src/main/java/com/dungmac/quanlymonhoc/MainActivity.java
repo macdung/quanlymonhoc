@@ -3,12 +3,12 @@ package com.dungmac.quanlymonhoc;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView lvContact;
+    private ListView lvGrade;
     private EditText etSearch;
     //ArrayList chua du lieu cho listview
     MyDB mysqlitedb;
@@ -26,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     //để lưu dữ liệu danh sách các Grade
     //khai báo một ArrayList<Grade>
     ArrayList<Grade> listGrade;
+    //Adapter của listview hiển thị danh sách Grade
+    MyGradeAdapter listGradeAdapter;
 
     private Button btnAdd, btnDel;
 
@@ -44,8 +46,16 @@ public class MainActivity extends AppCompatActivity {
 
         btnAdd = findViewById(R.id.btnAdd);
         btnDel = findViewById(R.id.btnDel);
+        lvGrade = findViewById(R.id.lvClass);
 
         handleButton();
+
+        listGrade = new ArrayList<>();
+        listGrade = mysqlitedb.getAllGrade();
+        //Tạo Adapter để đặt dữ liệu cho listview
+        listGradeAdapter = new MyGradeAdapter(this, listGrade);
+        //Gắn Addapter vào cho listview
+        lvGrade.setAdapter(listGradeAdapter);
     }
 
     private void handleButton() {
@@ -69,5 +79,25 @@ public class MainActivity extends AppCompatActivity {
 //            listUser.removeIf(User::getStatus);
 //            listUserAdapter.notifyDataSetChanged();
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode,
+                                    @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == 400) {
+            return;
+        }
+        //lấy dữ liệu từ NewContact gửi về
+        Bundle bundle = data.getExtras();
+        int id = bundle.getInt("Id");
+        String name = bundle.getString("Name");
+        if (requestCode == 100 && resultCode == 200) {
+            //đặt vào listData
+            listGrade.add(new Grade(name));
+            mysqlitedb.addGrade(new Grade(name));
+        }
+        listGradeAdapter.notifyDataSetChanged();
+        lvGrade.setAdapter(listGradeAdapter);
     }
 }
