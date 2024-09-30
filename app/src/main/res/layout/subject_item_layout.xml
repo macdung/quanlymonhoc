@@ -13,7 +13,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/grade_item_text"
+            android:id="@+id/subject_item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="9"
@@ -21,7 +21,7 @@
             android:text="TextView" />
 
         <CheckBox
-            android:id="@+id/checkBoxGrade"
+            android:id="@+id/checkBoxSubject"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"

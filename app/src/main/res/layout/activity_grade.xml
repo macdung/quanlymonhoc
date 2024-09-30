@@ -34,6 +34,9 @@
 
     <Button
         android:id="@+id/btnOK"
+        android:backgroundTint="#0095DA"
+        android:textSize="20sp"
+        app:cornerRadius="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="90dp"
@@ -46,6 +49,9 @@
 
     <Button
         android:id="@+id/btnCancel"
+        android:backgroundTint="#0095DA"
+        android:textSize="20sp"
+        app:cornerRadius="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"

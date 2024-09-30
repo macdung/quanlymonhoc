@@ -12,6 +12,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <EditText
                 android:id="@+id/etSearchClass"
                 android:layout_width="408dp"
@@ -20,8 +21,8 @@
                 android:layout_marginTop="3dp"
                 android:layout_marginEnd="1dp"
                 android:ems="10"
+                android:hint="Tìm kiếm"
                 android:inputType="textPersonName"
-                android:text="Search"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

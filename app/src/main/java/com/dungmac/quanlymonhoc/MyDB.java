@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,6 @@ public class MyDB extends SQLiteOpenHelper {
     public void addGrade(Grade grade) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
-        value.put(GradeId, grade.getId());
         value.put(GradeName, grade.getName());
         db.insert(Table1Name, null, value);
         db.close();
@@ -114,13 +114,13 @@ public class MyDB extends SQLiteOpenHelper {
         return list;
     }
 
-    public void addSubject(Subject subject) {
+    public void addSubject(Subject subject, int GradeId) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues value = new ContentValues();
         value.put(SubjectName, subject.getName());
         value.put(SubjectCount, subject.getCount());
         value.put(SubjectImagePath, subject.getImagePath());
-        value.put(GradeId, subject.getGradeId());  // Add GradeId
+        value.put("GradeId", GradeId);  // Add GradeId
         db.insert(Table2Name, null, value);
         db.close();
     }
@@ -144,7 +144,7 @@ public class MyDB extends SQLiteOpenHelper {
 
     public ArrayList<Subject> getAllSubjectsForGrade(int gradeId) {
         ArrayList<Subject> list = new ArrayList<>();
-        String sql = "SELECT * FROM " + Table2Name + " WHERE " + GradeId + "=?";
+        String sql = "SELECT * FROM " + Table2Name + " WHERE GradeId = ?";
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(gradeId)});
 

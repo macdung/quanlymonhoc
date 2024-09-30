@@ -2,7 +2,11 @@ package com.dungmac.quanlymonhoc;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -44,11 +48,10 @@ public class MainActivity extends AppCompatActivity {
 
         mysqlitedb = new MyDB(this, "QuanLyMonHoc", null, 3);
 
+        etSearch = findViewById(R.id.etSearchClass);
         btnAdd = findViewById(R.id.btnAdd);
         btnDel = findViewById(R.id.btnDel);
         lvGrade = findViewById(R.id.lvClass);
-
-        handleButton();
 
         listGrade = new ArrayList<>();
         listGrade = mysqlitedb.getAllGrade();
@@ -56,6 +59,42 @@ public class MainActivity extends AppCompatActivity {
         listGradeAdapter = new MyGradeAdapter(this, listGrade);
         //Gắn Addapter vào cho listview
         lvGrade.setAdapter(listGradeAdapter);
+
+        etSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start,
+                                      int before, int count) {
+                listGradeAdapter.getFilter().filter(s.toString());
+                listGradeAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+
+        handleButton();
+
+        lvGrade.setOnItemClickListener((parent, view, position, id) -> {
+            // Get the selected grade item
+            Grade selectedGrade = listGrade.get(position);
+
+            // Create an intent to start the new activity (GradeSubjectActivity)
+            Intent intent = new Intent(MainActivity.this, GradeSubjectActivity.class);
+
+            // Pass the selected grade data to the new activity
+            intent.putExtra("GradeId", selectedGrade.getId());
+            intent.putExtra("GradeName", selectedGrade.getName());
+
+            // Start the new activity
+            startActivity(intent);
+        });
+
     }
 
     private void handleButton() {
@@ -69,15 +108,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnDel.setOnClickListener(view -> {
-//            // xoá user nếu giá trị kiểm tra của mỗi phần tử là true
-//            for (int i = 0; i < listUser.size(); i++) {
-//                if (listUser.get(i).getStatus()) {
-//                    listUser.remove(i).getId();
-//                    mysqlitedb.deleteContact(listUser.get(i).getId());
-//                }
-//            }
-//            listUser.removeIf(User::getStatus);
-//            listUserAdapter.notifyDataSetChanged();
+            // xoá user nếu giá trị kiểm tra của mỗi phần tử là true
+            for (int i = 0; i < listGrade.size(); i++) {
+                if (listGrade.get(i).getStatus()) {
+                    mysqlitedb.deleteGrade(listGrade.get(i).getId());
+                    listGrade.remove(i);
+                }
+            }
+            listGradeAdapter.notifyDataSetChanged();
         });
     }
 
