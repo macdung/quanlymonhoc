@@ -108,12 +108,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         btnDel.setOnClickListener(view -> {
+            ArrayList<Grade> removeList = new ArrayList<Grade>();
             // xoá user nếu giá trị kiểm tra của mỗi phần tử là true
             for (int i = 0; i < listGrade.size(); i++) {
                 if (listGrade.get(i).getStatus()) {
                     mysqlitedb.deleteGrade(listGrade.get(i).getId());
-                    listGrade.remove(i);
+                    removeList.add(listGrade.get(i));
                 }
+            }
+
+            for (int i = 0; i < removeList.size(); i++) {
+                listGrade.remove(removeList.get(i));
             }
             listGradeAdapter.notifyDataSetChanged();
         });

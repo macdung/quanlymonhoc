@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -57,15 +58,19 @@ public class AddUpdateSubjectActivity extends AppCompatActivity {
         btnSelectImage = findViewById(R.id.btnSelectImage);
 
         myDB = new MyDB(this, "QuanLyMonHoc", null, 3);
+        subjectToUpdate = getIntent().getExtras().getParcelable("Subject");
         gradeId = getIntent().getIntExtra("GradeId", -1);
 
         // Check if it's an update
-        subjectToUpdate = (Subject) getIntent().getSerializableExtra("Subject");
         if (subjectToUpdate != null) {
+            gradeId = subjectToUpdate.getGradeId();
             etSubjectName.setText(subjectToUpdate.getName());
             etSubjectCount.setText(String.valueOf(subjectToUpdate.getCount()));
             selectedImagePath = subjectToUpdate.getImagePath();
-            ivSubjectImage.setImageURI(Uri.parse(selectedImagePath));  // Load existing image
+            if(selectedImagePath!=null){
+                ivSubjectImage.setImageURI(Uri.parse(selectedImagePath));  // Load existing image
+            }
+
         }
 
         // Select image from gallery

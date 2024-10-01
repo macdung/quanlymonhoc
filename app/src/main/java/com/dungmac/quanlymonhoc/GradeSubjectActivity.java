@@ -98,12 +98,18 @@ public class GradeSubjectActivity extends AppCompatActivity {
     }
 
     private void deleteSelectedSubjects() {
+        ArrayList<Subject> removeList = new ArrayList<Subject>();
         for (int i = 0; i < subjectList.size(); i++) {
             if (subjectList.get(i).getStatus()) {
-                myDB.deleteGrade(subjectList.get(i).getId());
-                subjectList.remove(i);
+                myDB.deleteSubject(subjectList.get(i).getId());
+                removeList.add(subjectList.get(i));
             }
         }
+
+        for (int i = 0; i < removeList.size(); i++) {
+           subjectList.remove(removeList.get(i));
+        }
+
         subjectAdapter.notifyDataSetChanged();
     }
 
