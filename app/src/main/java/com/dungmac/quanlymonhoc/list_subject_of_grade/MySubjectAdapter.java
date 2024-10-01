@@ -1,10 +1,9 @@
-package com.dungmac.quanlymonhoc;
-
-import static androidx.core.content.ContextCompat.startActivity;
+package com.dungmac.quanlymonhoc.list_subject_of_grade;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,20 +11,25 @@ import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dungmac.quanlymonhoc.R;
+import com.dungmac.quanlymonhoc.model.Subject;
+
+import java.io.File;
 import java.util.ArrayList;
 
-public class MyGradeAdapter extends BaseAdapter implements Filterable {
+public class MySubjectAdapter extends BaseAdapter implements Filterable {
     //khai báo đối tượng Activity để xác định Activity chứa Listview
     private Activity activity;
-    //khai báo đối tượng ArrayList<Grade> là nguồn dữ liệu cho Adapter
-    private ArrayList<Grade> data;
+    //khai báo đối tượng ArrayList<Subject> là nguồn dữ liệu cho Adapter
+    private ArrayList<Subject> data;
     //khai báo đối tương LayoutInflater để phân tích giao diện cho một phần tử
     private LayoutInflater inflater;
-    private ArrayList<Grade> databackup;
+    private ArrayList<Subject> databackup;
 
-    public MyGradeAdapter(Activity activity, ArrayList<Grade> data) {
+    public MySubjectAdapter(Activity activity, ArrayList<Subject> data) {
         this.activity = activity;
         this.data = data;
 //        databackup = data;
@@ -33,7 +37,7 @@ public class MyGradeAdapter extends BaseAdapter implements Filterable {
                 Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setData(ArrayList<Grade> data) {
+    public void setData(ArrayList<Subject> data) {
         this.data = data;
     }
 
@@ -56,27 +60,51 @@ public class MyGradeAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            v = inflater.inflate(R.layout.grade_item_layout, null);
+            v = inflater.inflate(R.layout.subject_item_layout, null);
 
             //tham chiếu tới textview để hiển thị tên
-            TextView name = v.findViewById(R.id.grade_item_text);
-            CheckBox chkstatus = v.findViewById(R.id.checkBoxGrade);
+            TextView name = v.findViewById(R.id.subject_item_text);
+            TextView count = v.findViewById(R.id.subject_item_text_count);
+            ImageView img = v.findViewById(R.id.subject_item_image);
+            CheckBox chkstatus = v.findViewById(R.id.checkBoxSubject);
+
             //thiết lập thuộc tính text của name là tên của phần tử thứ position
             name.setText(data.get(position).getName());
+            count.setText(String.format("Số tiết: %s", data.get(position).getCount()));
             chkstatus.setChecked(data.get(position).getStatus());
-            chkstatus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    data.get(position)
-                            .setStatus(!data.get(position).getStatus());
+            chkstatus.setOnClickListener(view -> data.get(position)
+                    .setStatus(!data.get(position).getStatus()));
+            if (data.get(position).getImagePath() != null) {
+                File imgFile = new File(data.get(position).getImagePath());
+                if (imgFile.exists()) {
+
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                    img.setImageBitmap(myBitmap);
+
                 }
-            });
+            }
+
+
         } else {
-            TextView name = v.findViewById(R.id.grade_item_text);
-            CheckBox chkstatus = v.findViewById(R.id.checkBoxGrade);
+            TextView name = v.findViewById(R.id.subject_item_text);
+            TextView count = v.findViewById(R.id.subject_item_text_count);
+            ImageView img = v.findViewById(R.id.subject_item_image);
+            CheckBox chkstatus = v.findViewById(R.id.checkBoxSubject);
 
             name.setText(data.get(position).getName());
+            count.setText(String.format("Số tiết: %s", data.get(position).getCount()));
             chkstatus.setChecked(data.get(position).getStatus());
+            if (data.get(position).getImagePath() != null) {
+                File imgFile = new File(data.get(position).getImagePath());
+                if (imgFile.exists()) {
+
+                    Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                    img.setImageBitmap(myBitmap);
+
+                }
+            }
         }
         return v;
     }
@@ -97,8 +125,8 @@ public class MyGradeAdapter extends BaseAdapter implements Filterable {
                 }
                 //Còn nếu không rỗng thì thực hiện filter
                 else {
-                    ArrayList<Grade> newdata = new ArrayList<>();
-                    for (Grade u : databackup)
+                    ArrayList<Subject> newdata = new ArrayList<>();
+                    for (Subject u : databackup)
                         if (u.getName().toLowerCase().contains(
                                 charSequence.toString().toLowerCase()))
                             newdata.add(u);
@@ -111,9 +139,9 @@ public class MyGradeAdapter extends BaseAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence charSequence,
                                           FilterResults filterResults) {
-                data = new ArrayList<Grade>();
-                ArrayList<Grade> tmp = (ArrayList<Grade>) filterResults.values;
-                for (Grade u : tmp)
+                data = new ArrayList<Subject>();
+                ArrayList<Subject> tmp = (ArrayList<Subject>) filterResults.values;
+                for (Subject u : tmp)
                     data.add(u);
                 notifyDataSetChanged();
             }

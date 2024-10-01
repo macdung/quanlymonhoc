@@ -1,4 +1,4 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.model;
 
 public class Grade {
     private int id;

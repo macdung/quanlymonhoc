@@ -1,4 +1,4 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.list_grade;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,9 +8,12 @@ import android.widget.EditText;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.dungmac.quanlymonhoc.R;
 
 public class GradeActivity extends AppCompatActivity {
 
@@ -29,6 +32,20 @@ public class GradeActivity extends AppCompatActivity {
         });
 
         setContentView(R.layout.activity_grade);
+
+        Toolbar toolbar = findViewById(R.id.toolbar_grade);
+
+        setSupportActionBar(toolbar);
+
+        // Enable the back button in the toolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            setResult(-1);
+            finish();
+        });
+
         etName = findViewById(R.id.etName);
 
         btnOk = findViewById(R.id.btnOK);

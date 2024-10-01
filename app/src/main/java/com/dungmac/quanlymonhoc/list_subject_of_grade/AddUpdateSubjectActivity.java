@@ -1,4 +1,4 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.list_subject_of_grade;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -7,7 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -17,11 +16,14 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.dungmac.quanlymonhoc.MyDB;
+import com.dungmac.quanlymonhoc.R;
+import com.dungmac.quanlymonhoc.model.Subject;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -49,6 +51,19 @@ public class AddUpdateSubjectActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+
+        Toolbar toolbar = findViewById(R.id.toolbar_subject);
+
+        setSupportActionBar(toolbar);
+
+        // Enable the back button in the toolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            setResult(-1);
+            finish();
         });
 
         etSubjectName = findViewById(R.id.etSubjectName);

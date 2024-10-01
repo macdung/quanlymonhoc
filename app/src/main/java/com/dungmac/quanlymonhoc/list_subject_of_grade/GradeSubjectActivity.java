@@ -1,10 +1,10 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.list_subject_of_grade;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -13,11 +13,15 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.io.Serializable;
+import com.dungmac.quanlymonhoc.MyDB;
+import com.dungmac.quanlymonhoc.R;
+import com.dungmac.quanlymonhoc.model.Subject;
+
 import java.util.ArrayList;
 
 public class GradeSubjectActivity extends AppCompatActivity {
@@ -42,8 +46,25 @@ public class GradeSubjectActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        Toolbar toolbar = findViewById(R.id.toolbar_grade_subject);
+
+        setSupportActionBar(toolbar);
+
+        // Enable the back button in the toolbar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
 
         gradeId = getIntent().getIntExtra("GradeId", -1);
+        String gradeName = getIntent().getStringExtra("GradeName");
+
+        toolbar.setTitle(gradeName);
+
+        toolbar.setNavigationOnClickListener(v -> {
+            setResult(-1);
+            finish();
+        });
+
 
         lvSubjects = findViewById(R.id.lvSubjects);
         etSearchSubject = findViewById(R.id.etSearchSubject);
@@ -107,7 +128,7 @@ public class GradeSubjectActivity extends AppCompatActivity {
         }
 
         for (int i = 0; i < removeList.size(); i++) {
-           subjectList.remove(removeList.get(i));
+            subjectList.remove(removeList.get(i));
         }
 
         subjectAdapter.notifyDataSetChanged();

@@ -1,4 +1,4 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.list_grade;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,18 +11,21 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.TextView;
 
+import com.dungmac.quanlymonhoc.R;
+import com.dungmac.quanlymonhoc.model.Grade;
+
 import java.util.ArrayList;
 
-public class MySubjectAdapter extends BaseAdapter implements Filterable {
+public class MyGradeAdapter extends BaseAdapter implements Filterable {
     //khai báo đối tượng Activity để xác định Activity chứa Listview
     private Activity activity;
-    //khai báo đối tượng ArrayList<Subject> là nguồn dữ liệu cho Adapter
-    private ArrayList<Subject> data;
+    //khai báo đối tượng ArrayList<Grade> là nguồn dữ liệu cho Adapter
+    private ArrayList<Grade> data;
     //khai báo đối tương LayoutInflater để phân tích giao diện cho một phần tử
     private LayoutInflater inflater;
-    private ArrayList<Subject> databackup;
+    private ArrayList<Grade> databackup;
 
-    public MySubjectAdapter(Activity activity, ArrayList<Subject> data) {
+    public MyGradeAdapter(Activity activity, ArrayList<Grade> data) {
         this.activity = activity;
         this.data = data;
 //        databackup = data;
@@ -30,7 +33,7 @@ public class MySubjectAdapter extends BaseAdapter implements Filterable {
                 Context.LAYOUT_INFLATER_SERVICE);
     }
 
-    public void setData(ArrayList<Subject> data) {
+    public void setData(ArrayList<Grade> data) {
         this.data = data;
     }
 
@@ -53,11 +56,11 @@ public class MySubjectAdapter extends BaseAdapter implements Filterable {
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
         if (v == null) {
-            v = inflater.inflate(R.layout.subject_item_layout, null);
+            v = inflater.inflate(R.layout.grade_item_layout, null);
 
             //tham chiếu tới textview để hiển thị tên
-            TextView name = v.findViewById(R.id.subject_item_text);
-            CheckBox chkstatus = v.findViewById(R.id.checkBoxSubject);
+            TextView name = v.findViewById(R.id.grade_item_text);
+            CheckBox chkstatus = v.findViewById(R.id.checkBoxGrade);
             //thiết lập thuộc tính text của name là tên của phần tử thứ position
             name.setText(data.get(position).getName());
             chkstatus.setChecked(data.get(position).getStatus());
@@ -69,8 +72,8 @@ public class MySubjectAdapter extends BaseAdapter implements Filterable {
                 }
             });
         } else {
-            TextView name = v.findViewById(R.id.subject_item_text);
-            CheckBox chkstatus = v.findViewById(R.id.checkBoxSubject);
+            TextView name = v.findViewById(R.id.grade_item_text);
+            CheckBox chkstatus = v.findViewById(R.id.checkBoxGrade);
 
             name.setText(data.get(position).getName());
             chkstatus.setChecked(data.get(position).getStatus());
@@ -94,8 +97,8 @@ public class MySubjectAdapter extends BaseAdapter implements Filterable {
                 }
                 //Còn nếu không rỗng thì thực hiện filter
                 else {
-                    ArrayList<Subject> newdata = new ArrayList<>();
-                    for (Subject u : databackup)
+                    ArrayList<Grade> newdata = new ArrayList<>();
+                    for (Grade u : databackup)
                         if (u.getName().toLowerCase().contains(
                                 charSequence.toString().toLowerCase()))
                             newdata.add(u);
@@ -108,9 +111,9 @@ public class MySubjectAdapter extends BaseAdapter implements Filterable {
             @Override
             protected void publishResults(CharSequence charSequence,
                                           FilterResults filterResults) {
-                data = new ArrayList<Subject>();
-                ArrayList<Subject> tmp = (ArrayList<Subject>) filterResults.values;
-                for (Subject u : tmp)
+                data = new ArrayList<Grade>();
+                ArrayList<Grade> tmp = (ArrayList<Grade>) filterResults.values;
+                for (Grade u : tmp)
                     data.add(u);
                 notifyDataSetChanged();
             }

@@ -5,10 +5,27 @@
     android:id="@+id/homepage"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-    <FrameLayout
+    tools:context=".list_grade.MainActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Danh sách khối"
+        app:titleTextColor="#FFFFFF" />
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_main">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -49,7 +66,7 @@
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="27dp"
                 android:backgroundTint="#0095DA"
-                android:text="Add"
+                android:text="Tạo"
                 android:textSize="16sp"
                 app:cornerRadius="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -66,7 +83,7 @@
                 android:layout_marginEnd="61dp"
                 android:layout_marginBottom="27dp"
                 android:backgroundTint="#0095DA"
-                android:text="Delete"
+                android:text="Xóa"
                 android:textSize="16sp"
                 app:cornerRadius="5dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +92,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/lvClass" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

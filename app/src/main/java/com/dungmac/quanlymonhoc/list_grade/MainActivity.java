@@ -1,12 +1,10 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.list_grade;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -17,6 +15,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.dungmac.quanlymonhoc.list_subject_of_grade.GradeSubjectActivity;
+import com.dungmac.quanlymonhoc.MyDB;
+import com.dungmac.quanlymonhoc.R;
+import com.dungmac.quanlymonhoc.model.Grade;
 
 import java.util.ArrayList;
 
@@ -128,7 +131,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode,
                                     @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == 400) {
+        if (resultCode == 400 || resultCode == -1) {
             return;
         }
         //lấy dữ liệu từ NewContact gửi về

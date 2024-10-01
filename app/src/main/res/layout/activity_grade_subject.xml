@@ -5,21 +5,32 @@
     android:id="@+id/grade_subject"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GradeSubjectActivity">
+    tools:context=".list_subject_of_grade.GradeSubjectActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_grade_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:titleTextColor="#FFFFFF" />
 
         <EditText
             android:id="@+id/etSearchSubject"
             android:layout_width="408dp"
             android:layout_height="50dp"
             android:layout_marginStart="2dp"
-            android:layout_marginTop="3dp"
             android:layout_marginEnd="1dp"
             android:ems="10"
             android:hint="Tìm kiếm"
             android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_grade_subject" />
 
         <Button
             android:id="@+id/btnAddSubject"
@@ -30,7 +41,7 @@
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="27dp"
             android:backgroundTint="#0095DA"
-            android:text="Add"
+            android:text="Tạo"
             android:textSize="16sp"
             app:cornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +58,7 @@
             android:layout_marginEnd="61dp"
             android:layout_marginBottom="27dp"
             android:backgroundTint="#0095DA"
-            android:text="Delete"
+            android:text="Xóa"
             android:textSize="16sp"
             app:cornerRadius="5dp"
             app:layout_constraintBottom_toBottomOf="parent"

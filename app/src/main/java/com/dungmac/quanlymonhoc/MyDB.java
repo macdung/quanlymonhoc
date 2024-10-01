@@ -6,7 +6,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
+
+import com.dungmac.quanlymonhoc.model.Grade;
+import com.dungmac.quanlymonhoc.model.Subject;
 
 import java.util.ArrayList;
 

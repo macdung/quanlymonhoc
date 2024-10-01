@@ -1,4 +1,4 @@
-package com.dungmac.quanlymonhoc;
+package com.dungmac.quanlymonhoc.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;

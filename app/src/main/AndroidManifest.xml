@@ -21,16 +21,16 @@
         android:theme="@style/Theme.QuanLyMonHoc"
         tools:targetApi="31">
         <activity
-            android:name=".AddUpdateSubjectActivity"
+            android:name=".list_subject_of_grade.AddUpdateSubjectActivity"
             android:exported="false" />
         <activity
-            android:name=".GradeSubjectActivity"
+            android:name=".list_subject_of_grade.GradeSubjectActivity"
             android:exported="false" />
         <activity
-            android:name=".GradeActivity"
+            android:name=".list_grade.GradeActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,7 +39,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".list_grade.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

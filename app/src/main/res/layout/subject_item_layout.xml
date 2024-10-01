@@ -9,36 +9,44 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="10">
 
         <ImageView
-            android:id="@+id/imageView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/subject_item_image"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             tools:srcCompat="@tools:sample/avatars" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_weight="8"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:weightSum="2">
 
             <TextView
                 android:id="@+id/subject_item_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="9"
+                android:layout_weight="1"
                 android:paddingLeft="20dp"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/subject_item_text_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:paddingLeft="20dp"
+                android:text="TextView"
+                android:textSize="18sp" />
         </LinearLayout>
 
         <CheckBox

@@ -5,28 +5,61 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/add_grade_subject"
-    tools:context=".AddUpdateSubjectActivity">
+    tools:context=".list_subject_of_grade.AddUpdateSubjectActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="Thông tin môn học"
+        app:titleTextColor="#FFFFFF" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:orientation="vertical"
         android:padding="16dp"
+        android:weightSum="2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/toolbar_subject">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Tên môn"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/etSubjectName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Subject Name" />
+            android:hint="Tên môn" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:text="Số tiết"
+            android:textSize="18sp" />
 
         <EditText
             android:id="@+id/etSubjectCount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Subject Count"
+            android:hint="Số tiết"
             android:inputType="number" />
 
         <ImageView
@@ -34,19 +67,29 @@
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:layout_gravity="center"
-            android:contentDescription="Subject Image" />
+            android:layout_margin="10dp"
+            android:contentDescription="Subject Image"
+            app:srcCompat="@android:drawable/ic_menu_gallery" />
 
-        <Button
-            android:id="@+id/btnSelectImage"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Select Image" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btnSave"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save Subject" />
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Chọn ảnh" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lưu" />
+        </LinearLayout>
 
     </LinearLayout>
 
